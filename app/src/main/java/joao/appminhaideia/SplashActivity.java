@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
 public class SplashActivity extends AppCompatActivity {
 
+    int tempoDeEspera = 1000 * 5;
     String TAG = "APP_MINHA_IDEIA";
 
     @Override
@@ -21,11 +23,17 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void trocarTela() {
-
         Log.d(TAG, "trocarTela: Mudando de Tela");
-        
-        Intent trocarDeTela = new Intent(SplashActivity.this, MainActivity.class);
-        startActivity(trocarDeTela);
-        finish();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(TAG, "trocarTela: Esperando o Tempo......");
+
+                Intent trocarDeTela = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(trocarDeTela);
+                finish();
+            }
+        },tempoDeEspera);
     }
 }
